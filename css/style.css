@@ -10,7 +10,12 @@
     #ffae15 11.12%,
     #ffa000 37.69%
   );
-  --background: radial-gradient(288.98% 60.29% at 25.91% 53.33%, #451650 0%, #491D59 45%, #381545 100%);
+  --background: radial-gradient(
+    288.98% 60.29% at 25.91% 53.33%,
+    #451650 0%,
+    #491d59 45%,
+    #381545 100%
+  );
 }
 
 body {
@@ -21,8 +26,8 @@ h1 {
   font-size: 26px;
 }
 
-h2{
-    font-size: 20px;
+h2 {
+  font-size: 20px;
 }
 /* Perfil do Aluno */
 .header {
@@ -119,4 +124,20 @@ h2{
 
 .nav-item {
   margin: 0 16px;
+}
+
+/*Responsivo*/
+@media screen and (max-width: 768px) {
+  .header{
+    height: 160px;
+  }
+  .user {
+    width: 60px;
+    height: 60px;
+    background-size: 30px;
+  }
+  .info {
+    margin-left: 0;
+    margin-top: 20px;
+  }
 }
