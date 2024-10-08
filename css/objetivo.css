@@ -1,0 +1,53 @@
+.objetivo {
+  position: relative;
+  background-image: var(--background);
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.objetivo img {
+  position: relative;
+  z-index: 1;
+  width: 180px;
+  height: auto;
+  margin-right: 28px;
+}
+
+.objetivo::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 100px; 
+  height: 100px;
+  background: radial-gradient(circle, rgba(255, 0, 255, 0.4), transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.objetivo .card-content {
+  position: relative;
+  z-index: 1;
+  margin-top: 20px;
+}
+
+.objetivo .card-content i {
+  margin-right: 8px;
+}
+
+.objetivo h3{
+    font-weight: bold;
+}
+
+.objetivo p{
+    font-size: 12px;
+}
+
+.objetivo span{
+    color: var(--yellow);
+    font-weight: bold;
+}

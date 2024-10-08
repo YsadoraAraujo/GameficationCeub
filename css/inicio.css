@@ -17,7 +17,7 @@
   font-weight: bold;
   margin: 0 16px;
   text-transform: uppercase;
-  white-space: nowrap; /* Ajustado para 'white-space' em vez de 'text-wrap' */
+  white-space: nowrap;
 }
 
 .dica .card-text {
@@ -197,7 +197,7 @@
   }
 
   thead {
-    display: none; /* Oculta o cabeçalho para dispositivos móveis */
+    display: none;
   }
 
   tbody {
