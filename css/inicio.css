@@ -141,18 +141,6 @@
   margin-top: 0 !important;
 }
 
-/* Tabela */
-.table thead tr th {
-  background-color: var(--secondary);
-  color: var(--white);
-  font-weight: 600;
-}
-
-.table tbody tr td {
-  background-color: transparent;
-  color: var(--white);
-  border-bottom: 1px solid var(--white);
-}
 
 /* Conquistas */
 .conquistas {

@@ -12,9 +12,11 @@
 .objetivo img {
   position: relative;
   z-index: 1;
-  width: 180px;
-  height: auto;
-  margin-right: 28px;
+  width: 100%;
+}
+
+.pontualidade{
+  max-width: 106px;
 }
 
 .objetivo::before {
@@ -41,13 +43,40 @@
 
 .objetivo h3{
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 .objetivo p{
     font-size: 12px;
+    margin-bottom: 0;
 }
 
 .objetivo span{
     color: var(--yellow);
     font-weight: bold;
+}
+
+.objetivo .progress-bar{
+  background-color: var(--blue);
+}
+
+.objetivo .progress{
+  height: 20px;
+}
+
+.objetivo .level h6{
+  margin-top: 0;
+}
+
+.conquistas {
+  background-image: var(--background);
+  border-radius: 8px;
+  margin-top: 16px;
+  padding: 24px;
+}
+
+.conquistas h2 {
+  color: var(--white);
+  font-weight: bold;
+  margin-bottom: 24px;
 }

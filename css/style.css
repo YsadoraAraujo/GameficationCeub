@@ -4,6 +4,7 @@
   --yellow: #f4f1bb;
   --orange: #ed6a5a;
   --white: #ffffff;
+  --blue: #9BC1BC;
   --podium: linear-gradient(
     160deg,
     #ffd54f -63.9%,
@@ -72,6 +73,22 @@ h2 {
   text-shadow: -2px 0px 0px var(--orange);
 }
 
+.coin{
+  max-width: 30px;
+  margin-right: 4px;
+}
+
+.moedas{
+  margin-left: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.moedas span{
+  color: var(--white);
+  text-shadow: -2px 0px 0px var(--secondary);
+}
+
 .progress {
   padding: 4px;
   height: 32px;
@@ -124,6 +141,19 @@ h2 {
 
 .nav-item {
   margin: 0 16px;
+}
+
+/* Tabela */
+.table thead tr th {
+  background-color: var(--secondary);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.table tbody tr td {
+  background-color: transparent;
+  color: var(--white);
+  border-bottom: 1px solid var(--white);
 }
 
 /*Responsivo*/
