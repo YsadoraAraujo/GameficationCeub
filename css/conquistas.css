@@ -128,7 +128,7 @@
   margin-right: 8px;
 }
 
-.objetivo::after {
+.card-front::after {
   content: "Ver objetivos";
   position: absolute;
   top: 0;
