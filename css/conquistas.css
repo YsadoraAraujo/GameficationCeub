@@ -34,7 +34,6 @@
 .objetivo .card-content {
   position: relative;
   z-index: 1;
-  margin-top: 20px;
 }
 
 .objetivo .card-content i {
@@ -85,7 +84,7 @@
 .card-flip {
   perspective: 1000px;
   width: 100%;
-  min-height: 160px;
+  min-height: 200px;
   cursor: pointer;
   height: 100%;
 }
@@ -122,4 +121,33 @@
 
 .card-flip.flip .card-inner {
   transform: rotateY(180deg);
+}
+
+.ceub_coins{
+  max-width: 14px;
+  margin-right: 8px;
+}
+
+.objetivo::after {
+  content: "Ver objetivos";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(73 29 89 / 80%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-weight: bold;
+  border-radius: 10px;
+  z-index: 2;
+}
+
+.objetivo:hover::after {
+  opacity: 1;
 }
