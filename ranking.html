@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Espaço Aluno | Gamification</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ranking.css">
+
+    <!-- Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="container mt-5 ranking">
+
+        <!-- Tabs Section -->
+        <ul class="nav nav-tabs nav-fill mb-4" id="rankingTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="turma-tab" data-bs-toggle="tab" data-bs-target="#turma"
+                    type="button" role="tab" aria-controls="turma" aria-selected="true">Por Turma</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="campo-tab" data-bs-toggle="tab" data-bs-target="#campo" type="button"
+                    role="tab" aria-controls="campo" aria-selected="false">Por Campus</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="semestre-tab" data-bs-toggle="tab" data-bs-target="#semestre" type="button"
+                    role="tab" aria-controls="semestre" aria-selected="false">Por Semestre</button>
+            </li>
+        </ul>
+
+        <!-- Tabs Content -->
+        <div class="tab-content" id="rankingTabsContent">
+            <!-- Tab: Por Turma -->
+            <div class="tab-pane fade show active" id="turma" role="tabpanel" aria-labelledby="turma-tab">
+                <div class="container">
+                    <div class="row">
+                        <h2>Ranking da turma</h2>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Posição</th>
+                                        <th>Aluno</th>
+                                        <th>Semestre</th>
+                                        <th>Pontos Totais</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Aluno E</td>
+                                        <td>2023.1</td>
+                                        <td>1500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Aluno F</td>
+                                        <td>2023.2</td>
+                                        <td>1450</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Por Campo -->
+            <div class="tab-pane fade" id="campo" role="tabpanel" aria-labelledby="campo-tab">
+                <div class="container">
+                    <div class="row">
+                        <h2>Ranking por Campus</h2>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Posição</th>
+                                        <th>Aluno</th>
+                                        <th>Semestre</th>
+                                        <th>Pontos Totais</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Aluno E</td>
+                                        <td>2023.1</td>
+                                        <td>1500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Aluno F</td>
+                                        <td>2023.2</td>
+                                        <td>1450</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Por Semestre -->
+            <div class="tab-pane fade" id="semestre" role="tabpanel" aria-labelledby="semestre-tab">
+                <div class="container">
+                    <div class="row">
+                        <h2>Ranking por Semestre</h2>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Posição</th>
+                                        <th>Aluno</th>
+                                        <th>Semestre</th>
+                                        <th>Pontos Totais</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Aluno E</td>
+                                        <td>2023.1</td>
+                                        <td>1500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Aluno F</td>
+                                        <td>2023.2</td>
+                                        <td>1450</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
