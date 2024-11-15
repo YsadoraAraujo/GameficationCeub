@@ -29,3 +29,30 @@
   .ranking .nav-item{
     margin: 0;
   }
+
+  .primeiro-lugar{
+    color: #FFD700;
+  }
+  .segundo-lugar{
+    color: #C0C0C0;
+  }
+  .terceiro-lugar{
+    color: #CD7F32;
+  }
+
+  .pagination {
+    text-align: center;
+    margin-top: 10px;
+}
+.pagination button {
+    padding: 5px 10px;
+    margin: 2px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+.pagination button.disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}

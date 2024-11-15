@@ -18,14 +18,13 @@
     <!-- Font-->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!--FontAwesome-->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
 
     <div class="container mt-5 ranking">
-
         <!-- Tabs Section -->
         <ul class="nav nav-tabs nav-fill mb-4" id="rankingTabs" role="tablist">
             <li class="nav-item" role="presentation">
@@ -48,38 +47,36 @@
             <div class="tab-pane fade show active" id="turma" role="tabpanel" aria-labelledby="turma-tab">
                 <div class="container">
                     <div class="row">
-                        <h2>Ranking da turma</h2>
+                        <h2>Ranking por Turma</h2>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th>Posição</th>
+                                        <th>Turma</th>
                                         <th>Aluno</th>
+                                        <th>Campus</th>
+                                        <th>Turno</th>
                                         <th>Semestre</th>
                                         <th>Pontos Totais</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Aluno E</td>
-                                        <td>2023.1</td>
-                                        <td>1500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Aluno F</td>
-                                        <td>2023.2</td>
-                                        <td>1450</td>
-                                    </tr>
+                                <tbody id="table-body-turma">
+                                    <!-- Conteúdo da tabela por turma será inserido aqui -->
                                 </tbody>
                             </table>
+                            <div class="pagination">
+                                <button id="prev-turma" onclick="prevPage('turma')">Anterior</button>
+                                <span id="page-info-turma"></span>
+                                <button id="next-turma" onclick="nextPage('turma')">Próxima</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tab: Por Campo -->
+            <!-- Tab: Por Campus -->
             <div class="tab-pane fade" id="campo" role="tabpanel" aria-labelledby="campo-tab">
                 <div class="container">
                     <div class="row">
@@ -94,21 +91,15 @@
                                         <th>Pontos Totais</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Aluno E</td>
-                                        <td>2023.1</td>
-                                        <td>1500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Aluno F</td>
-                                        <td>2023.2</td>
-                                        <td>1450</td>
-                                    </tr>
+                                <tbody id="table-body-campus">
+                                    <!-- Conteúdo da tabela por campus será inserido aqui -->
                                 </tbody>
                             </table>
+                            <div class="pagination">
+                                <button id="prev-campus" onclick="prevPage('campus')">Anterior</button>
+                                <span id="page-info-campus"></span>
+                                <button id="next-campus" onclick="nextPage('campus')">Próxima</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,21 +120,15 @@
                                         <th>Pontos Totais</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Aluno E</td>
-                                        <td>2023.1</td>
-                                        <td>1500</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Aluno F</td>
-                                        <td>2023.2</td>
-                                        <td>1450</td>
-                                    </tr>
+                                <tbody id="table-body-semestre">
+                                    <!-- Conteúdo da tabela por semestre será inserido aqui -->
                                 </tbody>
                             </table>
+                            <div class="pagination">
+                                <button id="prev-semestre" onclick="prevPage('semestre')">Anterior</button>
+                                <span id="page-info-semestre"></span>
+                                <button id="next-semestre" onclick="nextPage('semestre')">Próxima</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -152,8 +137,75 @@
     </div>
 
 
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap JS e o script com lógica de renderização -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Verificação inicial para garantir que o JavaScript está carregando
+        console.log("O JavaScript está funcionando");
+
+        // Dados de exemplo para simular a tabela
+        const data = [
+            { pos: "1º", turma: "Turma A", aluno: "João Silva", campus: "Asa Norte", turno: "Manhã", semestre: "2023.1", pontos: "1500" },
+            { pos: "2º", turma: "Turma A", aluno: "Maria Oliveira", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1450" },
+            { pos: "3º", turma: "Turma A", aluno: "Pedro Costa", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "1400" },
+            { pos: "4º", turma: "Turma A", aluno: "Lucas Santos", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1350" },
+            { pos: "5º", turma: "Turma A", aluno: "Ana Paula", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "1300" },
+            { pos: "6º", turma: "Turma A", aluno: "Felipe Nunes", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1250" },
+            { pos: "7º", turma: "Turma A", aluno: "Camila Rocha", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "1200" },
+            { pos: "8º", turma: "Turma A", aluno: "Bruno Mendes", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1150" },
+            { pos: "9º", turma: "Turma A", aluno: "Juliana Alves", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "1100" },
+            { pos: "10º", turma: "Turma A", aluno: "Rafael Ferreira", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1050" },
+        ];
+
+        const rowsPerPage = 5;
+        let currentPage = { turma: 1, campus: 1, semestre: 1 };
+
+        // Função para renderizar a tabela
+        function renderTable(tab) {
+            console.log(`Renderizando tabela para: ${tab}`);
+            const tableBody = document.getElementById(`table-body-${tab}`);
+            tableBody.innerHTML = ""; // Limpar conteúdo da tabela
+            const start = (currentPage[tab] - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+
+            data.slice(start, end).forEach((row, index) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${tab === 'turma' && index < 3 ? `<i class="fa-solid fa-crown ${index === 0 ? 'primeiro-lugar' : index === 1 ? 'segundo-lugar' : 'terceiro-lugar'}"></i>` : ''}</td>
+                    <td>${row.pos}</td>
+                    <td>${row.turma || ''}</td>
+                    <td>${row.aluno}</td>
+                    <td>${row.campus}</td>
+                    <td>${row.turno}</td>
+                    <td>${row.semestre}</td>
+                    <td>${row.pontos}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            document.getElementById(`page-info-${tab}`).textContent = `Página ${currentPage[tab]} de ${Math.ceil(data.length / rowsPerPage)}`;
+            document.getElementById(`prev-${tab}`).disabled = currentPage[tab] === 1;
+            document.getElementById(`next-${tab}`).disabled = currentPage[tab] === Math.ceil(data.length / rowsPerPage);
+        }
+
+        // Funções para mudar de página
+        function prevPage(tab) {
+            if (currentPage[tab] > 1) currentPage[tab]--;
+            renderTable(tab);
+        }
+
+        function nextPage(tab) {
+            if (currentPage[tab] < Math.ceil(data.length / rowsPerPage)) currentPage[tab]++;
+            renderTable(tab);
+        }
+
+        // Renderizar a primeira página em cada aba ao carregar
+        document.addEventListener("DOMContentLoaded", function() {
+            renderTable("turma");
+            renderTable("campus");
+            renderTable("semestre");
+        });
+    </script>
 </body>
 
 </html>
