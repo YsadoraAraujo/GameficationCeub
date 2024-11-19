@@ -19,23 +19,20 @@ const data = [
 ];
 
 const rowsPerPage = 5;
-let currentPage = { turma: 1, campus: 1, semestre: 1 };
+let currentPage = 1;
+const totalPages = Math.ceil(data.length / rowsPerPage);
 
-// Renderizar dados para a tabela de uma aba específica
-function renderTable(tab) {
-    console.log(`Renderizando tabela para: ${tab}`);
-    const tableBody = document.getElementById(`table-body-${tab}`);
-    tableBody.innerHTML = ""; // Limpar conteúdo da tabela
-    const start = (currentPage[tab] - 1) * rowsPerPage;
+function renderTable(page) {
+    const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
+    const tableBody = document.getElementById("table-body-turma");
 
-    // Filtrar e renderizar dados com base na aba ativa
+    tableBody.innerHTML = "";
     data.slice(start, end).forEach((row, index) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td>${tab === 'turma' && index < 3 ? `<i class="fa-solid fa-crown ${index === 0 ? 'primeiro-lugar' : index === 1 ? 'segundo-lugar' : 'terceiro-lugar'}"></i>` : ''}</td>
-            <td>${row.pos}</td>
-            <td>${row.turma || ''}</td>
+            <td>${index + 1 + start}</td>
+            <td>${row.turma}</td>
             <td>${row.aluno}</td>
             <td>${row.campus}</td>
             <td>${row.turno}</td>
@@ -44,26 +41,33 @@ function renderTable(tab) {
         `;
         tableBody.appendChild(tr);
     });
-
-    document.getElementById(`page-info-${tab}`).textContent = `Página ${currentPage[tab]} de ${Math.ceil(data.length / rowsPerPage)}`;
-    document.getElementById(`prev-${tab}`).disabled = currentPage[tab] === 1;
-    document.getElementById(`next-${tab}`).disabled = currentPage[tab] === Math.ceil(data.length / rowsPerPage);
+    renderPagination();
 }
 
-// Funções para mudar a página
-function prevPage(tab) {
-    if (currentPage[tab] > 1) currentPage[tab]--;
-    renderTable(tab);
+function renderPagination() {
+    const paginationContainer = document.getElementById("pagination");
+    paginationContainer.innerHTML = "";
+
+    for (let i = 1; i <= totalPages; i++) {
+        const pageItem = document.createElement("li");
+        pageItem.classList.add("page-item");
+        if (i === currentPage) pageItem.classList.add("active");
+
+        const pageLink = document.createElement("a");
+        pageLink.classList.add("page-link");
+        pageLink.textContent = i;
+        pageLink.href = "#";
+        pageLink.onclick = function () {
+            currentPage = i;
+            renderTable(currentPage);
+        };
+
+        pageItem.appendChild(pageLink);
+        paginationContainer.appendChild(pageItem);
+    }
 }
 
-function nextPage(tab) {
-    if (currentPage[tab] < Math.ceil(data.length / rowsPerPage)) currentPage[tab]++;
-    renderTable(tab);
-}
-
-// Renderizar a primeira página em cada aba ao carregar
-document.addEventListener("DOMContentLoaded", function() {
-    renderTable("turma");
-    renderTable("campus");
-    renderTable("semestre");
+// Carrega a primeira página da tabela e a paginação
+document.addEventListener("DOMContentLoaded", function () {
+    renderTable(currentPage);
 });

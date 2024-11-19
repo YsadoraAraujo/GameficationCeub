@@ -1,3 +1,8 @@
+// Defina a quantidade de linhas por página
+const rowsPerPage = 5;
+let currentPage = 1;
+
+// Função para carregar o conteúdo da página dinamicamente
 function loadPage(page, target, tabId) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", page, true);
@@ -16,7 +21,6 @@ function loadPage(page, target, tabId) {
 
             // Verifica se estamos carregando a página de rankings
             if (page === 'ranking.html') {
-                // Define a primeira aba como ativa (Por Turma)
                 let firstTabButton = document.getElementById("turma-tab");
                 let firstTabContent = document.getElementById("turma");
 
@@ -25,7 +29,6 @@ function loadPage(page, target, tabId) {
                     firstTabButton.setAttribute("aria-selected", "true");
                     firstTabContent.classList.add("show", "active");
 
-                    // Inicializa o ranking na aba Por Turma
                     if (typeof renderTable === "function") {
                         renderTable("turma"); // Chama renderTable se ela estiver definida
                     }
@@ -33,7 +36,9 @@ function loadPage(page, target, tabId) {
             }
 
             // Inicialize o flip após carregar o conteúdo dinâmico, se houver elementos
-            initializeFlip();
+            if (document.querySelectorAll('.card-flip').length > 0) {
+                initializeFlip();
+            }
         } else if (xhr.readyState === 4) {
             console.error(`Erro ao carregar a página: ${page}`);
         }
@@ -44,11 +49,7 @@ function loadPage(page, target, tabId) {
 // Função para inicializar o efeito de flip, somente se houver elementos com a classe '.card-flip'
 function initializeFlip() {
     const cards = document.querySelectorAll('.card-flip');
-    if (cards.length === 0) {
-        console.log("Nenhum elemento com a classe '.card-flip' encontrado na página");
-        return; // Sai da função se não encontrar elementos
-    }
-    console.log("Elementos de flip encontrados:", cards);
+    if (cards.length === 0) return;
     cards.forEach(card => {
         card.addEventListener('click', function () {
             card.classList.toggle('flip');
@@ -56,21 +57,16 @@ function initializeFlip() {
     });
 }
 
-// Carrega inicio.html automaticamente e inicializa o flip quando index.html é carregado
-document.addEventListener('DOMContentLoaded', function () {
-    loadPage('inicio.html', 'tab-content', 'inicio-tab');
-});
-
-// Função renderTable simulada para o ranking (defina-a corretamente no arquivo ranking.js)
+// Função para renderizar a tabela com paginação para diferentes abas
 function renderTable(tab) {
-    console.log(`Renderizando tabela para: ${tab}`);
     const tableBody = document.getElementById(`table-body-${tab}`);
-    if (!tableBody) {
-        console.error(`Elemento table-body-${tab} não encontrado`);
+    const paginationContainer = document.getElementById(`pagination-${tab}`);
+    if (!tableBody || !paginationContainer) {
+        console.error(`Elemento table-body-${tab} ou pagination-${tab} não encontrado`);
         return;
     }
 
-    // Dados de exemplo para renderização
+    // Filtragem de dados com base na aba
     const data = [
         { pos: "1º", turma: "Turma A", aluno: "João Silva", campus: "Asa Norte", turno: "Manhã", semestre: "2023.1", pontos: "1500" },
         { pos: "2º", turma: "Turma A", aluno: "Maria Oliveira", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1450" },
@@ -82,20 +78,25 @@ function renderTable(tab) {
         { pos: "8º", turma: "Turma A", aluno: "Bruno Mendes", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1150" },
         { pos: "9º", turma: "Turma A", aluno: "Juliana Alves", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "1100" },
         { pos: "10º", turma: "Turma A", aluno: "Rafael Ferreira", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1050" },
-        { pos: "11º", turma: "Turma A", aluno: "Bianca Dias", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "1000" },
-        { pos: "12º", turma: "Turma A", aluno: "Diego Martins", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "950" },
-        { pos: "13º", turma: "Turma A", aluno: "Mariana Gomes", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "900" },
-        { pos: "14º", turma: "Turma A", aluno: "Gustavo Ribeiro", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "850" },
-        { pos: "15º", turma: "Turma A", aluno: "Letícia Carvalho", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "800" }
     ];
 
-    // Exemplo de estrutura de dados e renderização
+    let filteredData = data;
+    if (tab === "campus") {
+        filteredData = data.filter(row => row.campus === "Asa Norte");
+    } else if (tab === "semestre") {
+        filteredData = data.filter(row => row.semestre === "2023.1");
+    }
+
+    const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    // Renderizar linhas de dados da tabela
     tableBody.innerHTML = "";
-    data.forEach((row, index) => {
+    filteredData.slice(start, end).forEach((row, index) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td>${tab === 'turma' && index < 3 ? `<i class="fa-solid fa-crown ${index === 0 ? 'primeiro-lugar' : index === 1 ? 'segundo-lugar' : 'terceiro-lugar'}"></i>` : ''}</td>
-            <td>${row.pos}</td>
+            <td>${index + 1 + start}</td>
             <td>${row.turma}</td>
             <td>${row.aluno}</td>
             <td>${row.campus}</td>
@@ -105,4 +106,75 @@ function renderTable(tab) {
         `;
         tableBody.appendChild(tr);
     });
+
+    // Atualizar a paginação
+    renderPagination(totalPages, paginationContainer, tab);
 }
+
+// Função para renderizar a paginação para diferentes abas
+function renderPagination(totalPages, paginationContainer, tab) {
+    paginationContainer.innerHTML = "";
+
+    // Botão Previous
+    const prevItem = document.createElement("li");
+    prevItem.classList.add("page-item");
+    if (currentPage === 1) prevItem.classList.add("disabled");
+
+    const prevLink = document.createElement("a");
+    prevLink.classList.add("page-link");
+    prevLink.href = "#";
+    prevLink.textContent = "Anterior";
+    prevLink.onclick = function (event) {
+        event.preventDefault();
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable(tab);
+        }
+    };
+    prevItem.appendChild(prevLink);
+    paginationContainer.appendChild(prevItem);
+
+    // Números das páginas
+    for (let i = 1; i <= totalPages; i++) {
+        const pageItem = document.createElement("li");
+        pageItem.classList.add("page-item");
+        if (i === currentPage) pageItem.classList.add("active");
+
+        const pageLink = document.createElement("a");
+        pageLink.classList.add("page-link");
+        pageLink.textContent = i;
+        pageLink.href = "#";
+        pageLink.onclick = function (event) {
+            event.preventDefault();
+            currentPage = i;
+            renderTable(tab);
+        };
+
+        pageItem.appendChild(pageLink);
+        paginationContainer.appendChild(pageItem);
+    }
+
+    // Botão Next
+    const nextItem = document.createElement("li");
+    nextItem.classList.add("page-item");
+    if (currentPage === totalPages) nextItem.classList.add("disabled");
+
+    const nextLink = document.createElement("a");
+    nextLink.classList.add("page-link");
+    nextLink.href = "#";
+    nextLink.textContent = "Próximo";
+    nextLink.onclick = function (event) {
+        event.preventDefault();
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderTable(tab);
+        }
+    };
+    nextItem.appendChild(nextLink);
+    paginationContainer.appendChild(nextItem);
+}
+
+// Carrega inicio.html automaticamente e inicializa o flip quando index.html é carregado
+document.addEventListener('DOMContentLoaded', function () {
+    loadPage('inicio.html', 'tab-content', 'inicio-tab');
+});

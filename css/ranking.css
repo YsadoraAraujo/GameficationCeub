@@ -1,58 +1,77 @@
 .ranking {
-    background-image: var(--background);
-    border-radius: 8px;
-    margin-top: 16px;
-    padding: 24px;
-  }
-  
-  .ranking h2 {
-    color: var(--white);
-    font-weight: bold;
-    margin-bottom: 24px;
-  }
-
-  .ranking .nav-tabs .nav-link{
-    color: #ffffff;
-    border-radius: 16px;
-  }
-
-  .ranking .nav-tabs .nav-link.active{
-    background-color: #b02788;
-  }
-
-  .ranking .nav-tabs{
-    background-color: #340f42;
-    border-radius: 20px;
-    padding: 8px;
-  }
-
-  .ranking .nav-item{
-    margin: 0;
-  }
-
-  .primeiro-lugar{
-    color: #FFD700;
-  }
-  .segundo-lugar{
-    color: #C0C0C0;
-  }
-  .terceiro-lugar{
-    color: #CD7F32;
-  }
-
-  .pagination {
-    text-align: center;
-    margin-top: 10px;
+  background-image: var(--background);
+  border-radius: 8px;
+  margin-top: 16px;
+  padding: 24px;
 }
+
+.ranking h2 {
+  color: var(--white);
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.ranking .nav-tabs .nav-link {
+  color: #ffffff;
+  border-radius: 16px;
+}
+
+.ranking .nav-tabs .nav-link.active {
+  background-color: #b02788;
+}
+
+.ranking .nav-tabs {
+  background-color: #340f42;
+  border-radius: 20px;
+  padding: 8px;
+}
+
+.ranking .nav-item {
+  margin: 0;
+}
+
+.primeiro-lugar {
+  color: #FFD700;
+}
+
+.segundo-lugar {
+  color: #C0C0C0;
+}
+
+.terceiro-lugar {
+  color: #CD7F32;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 10px;
+}
+
 .pagination button {
-    padding: 5px 10px;
-    margin: 2px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
+  padding: 5px 10px;
+  margin: 2px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
 }
+
 .pagination button.disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.active>.page-link,
+.page-link.active {
+  background-color: #b02788;
+  border-color: #b02788;
+  color: #ffffff;
+}
+.page-link:focus,
+.page-link.active:focus {
+  box-shadow: rgba(176, 39, 136, 0.25) 0px 0px 0px 4px;
+}
+
+.page-link, .page-link:hover{
+  color: #b02788;
 }

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/ranking.css">
 
-    <!-- Font-->
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- FontAwesome -->
@@ -29,15 +29,18 @@
         <ul class="nav nav-tabs nav-fill mb-4" id="rankingTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="turma-tab" data-bs-toggle="tab" data-bs-target="#turma"
-                    type="button" role="tab" aria-controls="turma" aria-selected="true">Por Turma</button>
+                    type="button" role="tab" aria-controls="turma" aria-selected="true"
+                    onclick="renderTable('turma')">Por Turma</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="campo-tab" data-bs-toggle="tab" data-bs-target="#campo" type="button"
-                    role="tab" aria-controls="campo" aria-selected="false">Por Campus</button>
+                <button class="nav-link" id="campo-tab" data-bs-toggle="tab" data-bs-target="#campus" type="button"
+                    role="tab" aria-controls="campus" aria-selected="false" onclick="renderTable('campus')">Por
+                    Campus</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="semestre-tab" data-bs-toggle="tab" data-bs-target="#semestre" type="button"
-                    role="tab" aria-controls="semestre" aria-selected="false">Por Semestre</button>
+                    role="tab" aria-controls="semestre" aria-selected="false" onclick="renderTable('semestre')">Por
+                    Semestre</button>
             </li>
         </ul>
 
@@ -52,7 +55,6 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th></th>
                                         <th>Posição</th>
                                         <th>Turma</th>
                                         <th>Aluno</th>
@@ -63,21 +65,19 @@
                                     </tr>
                                 </thead>
                                 <tbody id="table-body-turma">
-                                    <!-- Conteúdo da tabela por turma será inserido aqui -->
+                                    <!-- Conteúdo será renderizado via JavaScript -->
                                 </tbody>
                             </table>
-                            <div class="pagination">
-                                <button id="prev-turma" onclick="prevPage('turma')">Anterior</button>
-                                <span id="page-info-turma"></span>
-                                <button id="next-turma" onclick="nextPage('turma')">Próxima</button>
-                            </div>
                         </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center" id="pagination-turma"></ul>
+                        </nav>
                     </div>
                 </div>
             </div>
 
             <!-- Tab: Por Campus -->
-            <div class="tab-pane fade" id="campo" role="tabpanel" aria-labelledby="campo-tab">
+            <div class="tab-pane fade" id="campus" role="tabpanel" aria-labelledby="campo-tab">
                 <div class="container">
                     <div class="row">
                         <h2>Ranking por Campus</h2>
@@ -86,21 +86,22 @@
                                 <thead>
                                     <tr>
                                         <th>Posição</th>
+                                        <th>Turma</th>
                                         <th>Aluno</th>
+                                        <th>Campus</th>
+                                        <th>Turno</th>
                                         <th>Semestre</th>
                                         <th>Pontos Totais</th>
                                     </tr>
                                 </thead>
                                 <tbody id="table-body-campus">
-                                    <!-- Conteúdo da tabela por campus será inserido aqui -->
+                                    <!-- Conteúdo será renderizado via JavaScript -->
                                 </tbody>
                             </table>
-                            <div class="pagination">
-                                <button id="prev-campus" onclick="prevPage('campus')">Anterior</button>
-                                <span id="page-info-campus"></span>
-                                <button id="next-campus" onclick="nextPage('campus')">Próxima</button>
-                            </div>
                         </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center" id="pagination-campus"></ul>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -115,97 +116,32 @@
                                 <thead>
                                     <tr>
                                         <th>Posição</th>
+                                        <th>Turma</th>
                                         <th>Aluno</th>
+                                        <th>Campus</th>
+                                        <th>Turno</th>
                                         <th>Semestre</th>
                                         <th>Pontos Totais</th>
+
                                     </tr>
                                 </thead>
                                 <tbody id="table-body-semestre">
-                                    <!-- Conteúdo da tabela por semestre será inserido aqui -->
+                                    <!-- Conteúdo será renderizado via JavaScript -->
                                 </tbody>
                             </table>
-                            <div class="pagination">
-                                <button id="prev-semestre" onclick="prevPage('semestre')">Anterior</button>
-                                <span id="page-info-semestre"></span>
-                                <button id="next-semestre" onclick="nextPage('semestre')">Próxima</button>
-                            </div>
                         </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center" id="pagination-semestre"></ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
     <!-- Bootstrap JS e o script com lógica de renderização -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Verificação inicial para garantir que o JavaScript está carregando
-        console.log("O JavaScript está funcionando");
-
-        // Dados de exemplo para simular a tabela
-        const data = [
-            { pos: "1º", turma: "Turma A", aluno: "João Silva", campus: "Asa Norte", turno: "Manhã", semestre: "2023.1", pontos: "1500" },
-            { pos: "2º", turma: "Turma A", aluno: "Maria Oliveira", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1450" },
-            { pos: "3º", turma: "Turma A", aluno: "Pedro Costa", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "1400" },
-            { pos: "4º", turma: "Turma A", aluno: "Lucas Santos", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1350" },
-            { pos: "5º", turma: "Turma A", aluno: "Ana Paula", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "1300" },
-            { pos: "6º", turma: "Turma A", aluno: "Felipe Nunes", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1250" },
-            { pos: "7º", turma: "Turma A", aluno: "Camila Rocha", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "1200" },
-            { pos: "8º", turma: "Turma A", aluno: "Bruno Mendes", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1150" },
-            { pos: "9º", turma: "Turma A", aluno: "Juliana Alves", campus: "Asa Norte", turno: "Manhã", semestre: "2023.2", pontos: "1100" },
-            { pos: "10º", turma: "Turma A", aluno: "Rafael Ferreira", campus: "Taguatinga", turno: "Noite", semestre: "2023.1", pontos: "1050" },
-        ];
-
-        const rowsPerPage = 5;
-        let currentPage = { turma: 1, campus: 1, semestre: 1 };
-
-        // Função para renderizar a tabela
-        function renderTable(tab) {
-            console.log(`Renderizando tabela para: ${tab}`);
-            const tableBody = document.getElementById(`table-body-${tab}`);
-            tableBody.innerHTML = ""; // Limpar conteúdo da tabela
-            const start = (currentPage[tab] - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-
-            data.slice(start, end).forEach((row, index) => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td>${tab === 'turma' && index < 3 ? `<i class="fa-solid fa-crown ${index === 0 ? 'primeiro-lugar' : index === 1 ? 'segundo-lugar' : 'terceiro-lugar'}"></i>` : ''}</td>
-                    <td>${row.pos}</td>
-                    <td>${row.turma || ''}</td>
-                    <td>${row.aluno}</td>
-                    <td>${row.campus}</td>
-                    <td>${row.turno}</td>
-                    <td>${row.semestre}</td>
-                    <td>${row.pontos}</td>
-                `;
-                tableBody.appendChild(tr);
-            });
-
-            document.getElementById(`page-info-${tab}`).textContent = `Página ${currentPage[tab]} de ${Math.ceil(data.length / rowsPerPage)}`;
-            document.getElementById(`prev-${tab}`).disabled = currentPage[tab] === 1;
-            document.getElementById(`next-${tab}`).disabled = currentPage[tab] === Math.ceil(data.length / rowsPerPage);
-        }
-
-        // Funções para mudar de página
-        function prevPage(tab) {
-            if (currentPage[tab] > 1) currentPage[tab]--;
-            renderTable(tab);
-        }
-
-        function nextPage(tab) {
-            if (currentPage[tab] < Math.ceil(data.length / rowsPerPage)) currentPage[tab]++;
-            renderTable(tab);
-        }
-
-        // Renderizar a primeira página em cada aba ao carregar
-        document.addEventListener("DOMContentLoaded", function() {
-            renderTable("turma");
-            renderTable("campus");
-            renderTable("semestre");
-        });
-    </script>
+    <script src="js/script.js"></script> <!-- Atualize o caminho se necessário -->
 </body>
 
 </html>
