@@ -75,3 +75,43 @@
 .page-link, .page-link:hover{
   color: #b02788;
 }
+
+/* Estilos para as imagens dos três primeiros lugares */
+.primeiro-lugar td:first-child {
+  position: relative;
+  padding-left: 30px;
+}
+.primeiro-lugar td:first-child::before {
+  content: url('../img/primeiro_lugar.png'); /* Caminho da imagem do 1º lugar */
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 16px;
+}
+
+.segundo-lugar td:first-child {
+  position: relative;
+  padding-left: 30px;
+}
+.segundo-lugar td:first-child::before {
+  content: url('../img/segundo_lugar.png'); /* Caminho da imagem do 2º lugar */
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 16px;
+}
+
+.terceiro-lugar td:first-child {
+  position: relative;
+  padding-left: 30px;
+}
+.terceiro-lugar td:first-child::before {
+  content: url('../img/terceiro_lugar.png'); /* Caminho da imagem do 3º lugar */
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 16px;
+}

@@ -95,6 +95,11 @@ function renderTable(tab) {
     tableBody.innerHTML = "";
     filteredData.slice(start, end).forEach((row, index) => {
         const tr = document.createElement("tr");
+        // Adicione classes para os três primeiros lugares
+        if (index + 1 === 1) tr.classList.add("primeiro-lugar");
+        if (index + 1 === 2) tr.classList.add("segundo-lugar");
+        if (index + 1 === 3) tr.classList.add("terceiro-lugar");
+
         tr.innerHTML = `
             <td>${index + 1 + start}</td>
             <td>${row.turma}</td>
