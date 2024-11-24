@@ -101,13 +101,13 @@ function renderTable(tab) {
         if (index + 1 === 3) tr.classList.add("terceiro-lugar");
 
         tr.innerHTML = `
-            <td>${index + 1 + start}</td>
-            <td>${row.turma}</td>
-            <td>${row.aluno}</td>
-            <td>${row.campus}</td>
-            <td>${row.turno}</td>
-            <td>${row.semestre}</td>
-            <td>${row.pontos}</td>
+            <td data-label="Posição">${index + 1 + start}</td>
+            <td data-label="Turma">${row.turma}</td>
+            <td data-label="Aluno">${row.aluno}</td>
+            <td data-label="Campus">${row.campus}</td>
+            <td data-label="Turno">${row.turno}</td>
+            <td data-label="Semestre">${row.semestre}</td>
+            <td data-label="Pontos Totais">${row.pontos}</td>
         `;
         tableBody.appendChild(tr);
     });
