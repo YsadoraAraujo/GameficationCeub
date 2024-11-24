@@ -169,6 +169,13 @@ h2 {
     margin-left: 0;
     margin-top: 20px;
   }
+  .title span {
+    font-size: 24px;
+  }
+
+  .coin {
+    max-width: 16px;
+  }
 }
 
 
@@ -216,12 +223,14 @@ h2 {
     min-width: 126px;
   }
 
-  .primeiro-lugar td:first-child::before, .segundo-lugar td:first-child::before, .terceiro-lugar td:first-child::before  {
-    content: attr(data-label)!important;
-    position: relative!important;
-    left: 0!important;
-    top: 0!important;
-    transform: none!important;
-    max-width: inherit!important;
+  .primeiro-lugar td:first-child::before,
+  .segundo-lugar td:first-child::before,
+  .terceiro-lugar td:first-child::before {
+    content: attr(data-label) !important;
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+    max-width: inherit !important;
   }
 }

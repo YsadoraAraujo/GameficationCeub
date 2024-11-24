@@ -151,3 +151,12 @@
 .objetivo:hover::after {
   opacity: 1;
 }
+
+@media screen and (max-width: 768px) {
+.objetivo img{
+  width: 14%;
+}
+.card-flip{
+  min-height: 240px
+}
+}
